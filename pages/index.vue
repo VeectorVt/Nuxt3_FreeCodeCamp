@@ -5,36 +5,31 @@
 
 // const store = useCounterStore2()
 // console.log(store)
-const { data:rick } = await useAsyncData("characters", async () => {
-const rickData = await $fetch("https://rickandmortyapi.com/api/character") ;
+const { data: rick } = await useAsyncData(
+  "characters",
+  async () => {
+    const rickData = await $fetch("https://rickandmortyapi.com/api/character");
 
-  
-
-  return {
-    info: rickData.info,
-    results: rickData.results,
-  };
-}, {
-  // lazy:true
-});
-
-
-
+    return {
+      info: rickData.info,
+      results: rickData.results,
+    };
+  },
+  {
+    // lazy:true
+  }
+);
 
 let rickImage = ref(rick?.value?.results[2].image);
 
 function refresh() {
   console.log(rick);
 
-  
   rickImage.value =
     rickImage.value == rick?.value?.results[1].image
       ? rick?.value?.results[2].image
       : rick?.value?.results[1].image;
- 
 }
-
-
 </script>
 
 <template>
@@ -45,8 +40,8 @@ function refresh() {
 
     <img :src="rickImage" alt="" />
 
-    <!-- <ContentDoc /> -->
+    <ContentDoc />
   </div>
-  <!-- <Counter id="counter"/>
-  <ProfileHeaderAvatar/> -->
+  <!-- <Counter id="counter"/> -->
+  <!-- <ProfileHeaderAvatar/> -->
 </template>
